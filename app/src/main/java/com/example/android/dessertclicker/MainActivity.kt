@@ -29,13 +29,13 @@ import com.example.android.dessertclicker.databinding.ActivityMainBinding
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var dessertTimer : DessertTimer;
+
     private var revenue = 0
     private var dessertsSold = 0
 
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var dessertTimer : DessertTimer;
     data class Dessert(val imageId: Int, val price: Int, val startProductionAmount: Int)
 
     // Create a list of all desserts, in order of when they start being produced
@@ -58,14 +58,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        dessertTimer = DessertTimer()
         Timber.i("onCreate called")
 
         // Use Data Binding to get reference to the views
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.dessertButton.setOnClickListener {
-            dessertTimer = DessertTimer()
+
             onDessertClicked()
         }
 
@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity() {
     /** Lifecycle Methods **/
     override fun onStart() {
         super.onStart()
+        dessertTimer.startTimer()
 
         Timber.i("onStart called")
     }
@@ -163,6 +164,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        dessertTimer.stopTimer()
+
         Timber.i("onStop Called")
     }
 
