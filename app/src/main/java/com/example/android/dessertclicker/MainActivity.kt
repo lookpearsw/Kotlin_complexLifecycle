@@ -58,7 +58,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dessertTimer = DessertTimer()
+
+        dessertTimer = DessertTimer(this.lifecycle)
+
         Timber.i("onCreate called")
 
         // Use Data Binding to get reference to the views
@@ -147,8 +149,6 @@ class MainActivity : AppCompatActivity() {
     /** Lifecycle Methods **/
     override fun onStart() {
         super.onStart()
-        dessertTimer.startTimer()
-
         Timber.i("onStart called")
     }
 
@@ -164,8 +164,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        dessertTimer.stopTimer()
-
         Timber.i("onStop Called")
     }
 
